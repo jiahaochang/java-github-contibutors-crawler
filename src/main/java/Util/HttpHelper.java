@@ -1,7 +1,6 @@
 package Util;
 
 import com.alibaba.fastjson.JSON;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -19,10 +18,9 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
-@Slf4j
 public class HttpHelper {
-    private static final String APP_KEY = "jiahao.zhang";
-    private static final String SECRET_KEY = "Haohaode521";
+    //private static final String APP_KEY = "jiahao.zhang";
+    //private static final String SECRET_KEY = "Haohaode521";
 
     /**
      * 构造带authToken和baSource的header
@@ -69,7 +67,7 @@ public class HttpHelper {
         //httpGet.addHeader("Authorization", getHeader());
 
         if (header!=null){
-//            header.entrySet().stream().forEach(entry -> httpGet.addHeader(entry.getKey(), entry.getValue()));
+            header.entrySet().stream().forEach(entry -> httpGet.addHeader(entry.getKey(), entry.getValue()));
         }
 
         //3.发起请求，获取响应信息
@@ -178,7 +176,7 @@ public class HttpHelper {
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 String resultStr = EntityUtils.toString(entity, "utf-8");
-//                log.info("POST请求结果：" + resultStr);
+                //log.info("POST请求结果：" + resultStr);
 
                 return resultStr;
                 /*//解析响应内容

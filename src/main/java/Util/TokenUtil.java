@@ -1,5 +1,11 @@
 package Util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Author: Jiahao Zhang
  * @Date: 2019/4/5 14:43
@@ -1502,7 +1508,22 @@ public class TokenUtil {
         while (true){
             int index=(int)(Math.random() * tokens.length);
             String token = tokens[index];
-            return token;
+            Map<String, String> header = new HashMap<>();
+            header.put("Authorization", token);
+            String rateLimitUrl = "https://api.github.com/rate_limit";
+            try {
+                String httpResponse = HttpHelper.doGet(rateLimitUrl, header);
+                System.out.println(httpResponse);
+                JSONObject responseJson = JSON.parseObject(httpResponse);
+                JSONObject rate = responseJson.getJSONObject("rate");
+                Integer remaining = rate.getInteger("remaining");
+                if (remaining>0){
+                    return token;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
