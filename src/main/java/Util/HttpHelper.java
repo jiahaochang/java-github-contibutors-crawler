@@ -78,6 +78,7 @@ public class HttpHelper {
             //3.2 发起请求，获取响应信息
             response = httpClient.execute(httpGet, new BasicHttpContext());
             //如果返回结果的code不等于200，说明出错了
+            //System.out.println(response.getStatusLine().getStatusCode());
             if (response.getStatusLine().getStatusCode() != 200) {
 //                log.info("request url failed, http code=" + response.getStatusLine().getStatusCode() + ", url=" + url);
                 return null;
@@ -86,7 +87,7 @@ public class HttpHelper {
             HttpEntity entity = response.getEntity();      //reponse返回的数据在entity中
             if (entity != null) {
                 String resultStr = EntityUtils.toString(entity, "utf-8");  //将数据转化为string格式
-//                log.info(resultStr);
+                //System.out.println(resultStr);
                 //JSONObject result = JSON.parseObject(resultStr);    //将String转换为 JSONObject
                 return resultStr;
                 /*if(result.getInteger("errcode")==null) {

@@ -1517,7 +1517,8 @@ public class TokenUtil {
                 JSONObject responseJson = JSON.parseObject(httpResponse);
                 JSONObject rate = responseJson.getJSONObject("rate");
                 Integer remaining = rate.getInteger("remaining");
-                if (remaining>0){
+                //System.out.println(remaining);
+                if (remaining>10){
                     return token;
                 }
             } catch (Exception e) {

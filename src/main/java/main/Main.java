@@ -3,6 +3,8 @@ package main;
 import Util.FileUtil;
 import Util.PathConf;
 import Util.TokenUtil;
+import service.ContributorService;
+import service.impl.ContributorServiceImpl;
 
 import java.util.List;
 
@@ -14,8 +16,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String args[]){
-        TokenUtil.getUsableToken();
-
-        List<String> tencentAccountList = FileUtil.readCsv(PathConf.TencentAccountFile);
+        String token = TokenUtil.getUsableToken();
+        System.out.println(token);
+        //List<String> tencentAccountList = FileUtil.readCsv(PathConf.TencentAccountFile);
+        ContributorService contributorService = new ContributorServiceImpl();
+        List<String> contributorUrlList = contributorService.getProjectListByAccount("baidu", token);
+        System.out.println(contributorUrlList);
     }
 }
