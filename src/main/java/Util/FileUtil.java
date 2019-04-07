@@ -36,6 +36,46 @@ public class FileUtil {
             e.printStackTrace();
         }
         return allString;
+    }
 
+    public static void writeToFile(String saveFile, String content){
+        //String saveFile = "test.json";
+        File file = new File(saveFile);
+        FileOutputStream fos = null;
+        OutputStreamWriter osw = null;
+
+        try {
+            if (!file.exists()) {
+                boolean hasFile = file.createNewFile();
+                if(hasFile){
+                    System.out.println("file not exists, create new file");
+                }
+                fos = new FileOutputStream(file);
+            } else {
+                System.out.println("file exists");
+                fos = new FileOutputStream(file, true);
+            }
+
+            osw = new OutputStreamWriter(fos, "utf-8");
+            osw.write(content+","); //写入内容,内容后面添加逗号分隔
+            osw.write("\r\n");  //换行
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {   //关闭流
+            try {
+                if (osw != null) {
+                    osw.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (fos != null) {
+                    fos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -87,8 +87,9 @@ public class HttpHelper {
             HttpEntity entity = response.getEntity();      //reponse返回的数据在entity中
             if (entity != null) {
                 String resultStr = EntityUtils.toString(entity, "utf-8");  //将数据转化为string格式
-                //System.out.println(resultStr);
                 //JSONObject result = JSON.parseObject(resultStr);    //将String转换为 JSONObject
+                //System.out.println("http请求的返回结果");
+                //System.out.println(resultStr);
                 return resultStr;
                 /*if(result.getInteger("errcode")==null) {
                     return result;

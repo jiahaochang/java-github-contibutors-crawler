@@ -10,5 +10,5 @@ public class PathConf {
     public static String TencentAccountFile = "src/main/resources/data/account_data/tencent_account.csv";
     public static String BaiduAccountFile = "src/main/resources/data/account_data/baidu_account.csv";
     public static String AlibabaAccountFile = "src/main/resources/data/account_data/alibaba_account.csv";
-
+    public static String OutPutFile = "src/main/resources/output/contributors.json";
 }

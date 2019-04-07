@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
 /**
  * @Author: Jiahao Zhang
  * @Date: 2019/4/5 14:43
@@ -13,6 +12,7 @@ import java.util.Map;
  * @Version 1.0
  */
 public class TokenUtil {
+
     public static String [] tokens = {
             "acd18045340051e7bd1e1a4bd6e4f2571c475e53", "8f18b44183b0586e016b438e2cd5ec28da4c1c81",
             "cf8fb2ea85ce4556b0de4743a28ca355b2d872c4", "2b97297a68bdf42c03a1c52934b86c60b9d2e455",
@@ -1507,18 +1507,20 @@ public class TokenUtil {
     public static String getUsableToken(){
         while (true){
             int index=(int)(Math.random() * tokens.length);
+            //System.out.println("index = "+ index);
             String token = tokens[index];
             Map<String, String> header = new HashMap<>();
             header.put("Authorization", token);
             String rateLimitUrl = "https://api.github.com/rate_limit";
             try {
                 String httpResponse = HttpHelper.doGet(rateLimitUrl, header);
-                System.out.println(httpResponse);
+                //System.out.println(httpResponse);
                 JSONObject responseJson = JSON.parseObject(httpResponse);
                 JSONObject rate = responseJson.getJSONObject("rate");
                 Integer remaining = rate.getInteger("remaining");
-                //System.out.println(remaining);
-                if (remaining>10){
+                //System.out.println("rate-remaining = "+remaining);
+                //log.info("rate-remaining = "+remaining);
+                if (remaining>0){
                     return token;
                 }
             } catch (Exception e) {
